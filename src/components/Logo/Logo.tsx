@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 
 export function Logo() {
   const logoGltf = useGLTF('models/glitr_heart.gltf');
-  console.log(logoGltf);
 
   return (
     <Suspense fallback={null}>
