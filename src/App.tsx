@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import './App.css';
 import { Scene } from './components/Scene';
 
@@ -8,16 +8,26 @@ function App() {
 
   return (
     <div className="App" style={{ height: '100vh' }}>
-      <Canvas
-        onPointerDown={() => {
-          setAutoRotate(false);
-        }}
-        onPointerUp={() => {
-          setAutoRotate(true);
-        }}
+      <Suspense
+        fallback={
+          <img
+            src="./images/mialisa_logo.jpg"
+            alt="Mia Lisa"
+            style={{ width: '100%', height: '100%' }}
+          />
+        }
       >
-        <Scene autoRotate={autoRotate} />
-      </Canvas>
+        <Canvas
+          onPointerDown={() => {
+            setAutoRotate(false);
+          }}
+          onPointerUp={() => {
+            setAutoRotate(true);
+          }}
+        >
+          <Scene autoRotate={autoRotate} />
+        </Canvas>
+      </Suspense>
     </div>
   );
 }
