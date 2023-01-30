@@ -13,3 +13,11 @@
 ```
 
 > Remember to set the `class` attribute if you have one. Also, the iframe is interactive, so if you have it wrapped in a link, like `<a>` — the link won't work out of the box.
+
+### Current Production Usage
+
+> In Shopify
+
+```liquid
+<iframe src="https://mia-lisa-3d.vercel.app" height={{ logo_height }} width={{ section.settings.logo_width }} title="{{ logo_alt }} (3D Logo)" style="border: none"></iframe>
+```
