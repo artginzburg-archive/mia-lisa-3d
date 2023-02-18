@@ -7,12 +7,19 @@ import {
   PresentationControls,
 } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Group } from 'three';
 
 import { Logo } from '../Logo';
 
 export function Scene({ autoRotate }: { autoRotate: boolean }) {
+  //#region this fixes the difference in autoRotateSpeed between browsers, that was happening due to framerate (e.g. Safari clamps it to 60, and Chrome allows up to 120).
+  const [autoRotateSpeed, setAutoRotateSpeed] = useState(13);
+  useFrame((state, delta) => {
+    setAutoRotateSpeed(delta * 500); // 750 was kinda fine, but maybe too fast
+  });
+  //#endregion
+
   return (
     <>
       <PresentationControls
@@ -107,7 +114,7 @@ export function Scene({ autoRotate }: { autoRotate: boolean }) {
       </Environment>
       <OrbitControls
         autoRotate={autoRotate}
-        autoRotateSpeed={13}
+        autoRotateSpeed={autoRotateSpeed}
         enableZoom={false}
         enablePan={false}
         enableDamping={false}
